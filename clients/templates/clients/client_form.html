@@ -6,18 +6,29 @@
 <form method="post" novalidate>
     {% csrf_token %}
     
-    {% for field in form %}
-        <div style="margin-bottom: 15px;">
-            {{ field.label_tag }}
-            <br>
-            {{ field }}
-            {% if field.errors %}
-                <div style="color: red; font-size: 14px;">
-                    {{ field.errors|striptags }}
-                </div>
-            {% endif %}
-        </div>
-    {% endfor %}
+    <div style="margin-bottom: 15px;">
+        <label>Полное имя:</label><br>
+        <input type="text" name="full_name" value="{{ form.full_name.value|default:'' }}">
+        <div style="color: red;">{{ form.full_name.errors|striptags }}</div>
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+        <label>Email:</label><br>
+        <input type="email" name="email" value="{{ form.email.value|default:'' }}">
+        <div style="color: red;">{{ form.email.errors|striptags }}</div>
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+        <label>Телефон:</label><br>
+        <input type="text" name="phone" value="{{ form.phone.value|default:'' }}">
+        <div style="color: red;">{{ form.phone.errors|striptags }}</div>
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+        <label>Дата регистрации:</label><br>
+        <input type="date" name="registration_date" value="{{ form.registration_date.value|default:'' }}">
+        <div style="color: red;">{{ form.registration_date.errors|striptags }}</div>
+    </div>
     
     <button type="submit">Сохранить</button>
     <a href="{% url 'client_list' %}">Отмена</a>
